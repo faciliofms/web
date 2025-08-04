@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Facilio Facility Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        .orange-button {
+            background-color: #f97316;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .orange-button:hover {
+            background-color: #ea580c;
+            transform: translateY(-2px);
+        }
+        .text-orange-primary {
+            color: #f97316;
+        }
+        .bg-orange-primary {
+            background-color: #f97316;
+        }
+        .contact-card {
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+        .contact-card:hover {
+            transform: translateY(-5px);
+            border-left-color: #f97316;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: #fff7ed;
+            color: #f97316;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .hamburger {
+            width: 24px;
+            height: 24px;
+            transition: all 0.25s;
+            position: relative;
+        }
+        .hamburger-top,
+        .hamburger-middle,
+        .hamburger-bottom {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 24px;
+            height: 2px;
+            background: #4b5563;
+            transform: rotate(0);
+            transition: all 0.5s;
+        }
+        .hamburger-middle {
+            transform: translateY(7px);
+        }
+        .hamburger-bottom {
+            transform: translateY(14px);
+        }
+        .open .hamburger-top {
+            transform: rotate(45deg) translateY(6px) translate(6px);
+        }
+        .open .hamburger-middle {
+            display: none;
+        }
+        .open .hamburger-bottom {
+            transform: rotate(-45deg) translateY(6px) translate(-6px);
+        }
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+        .mobile-menu.open {
+            max-height: 500px;
+        }
+        .logo-img {
+            height: 40px;
+            width: auto;
+        }
+        .fade-in {
+            opacity: 0;
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            transform: translateY(20px);
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .map-container {
+            height: 400px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .form-input {
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 12px 16px;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        .form-input:focus {
+            border-color: #f97316;
+            box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.2);
+            outline: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Header Section -->
+    <header class="bg-white shadow-sm py-4 sticky top-0 z-50">
+        <nav class="container mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center space-x-8">
+                <a href="index.html" class="text-2xl font-bold text-gray-900 flex items-center">
+                    <img src="PHOTO-2025-07-30-21-37-13-removebg-preview.png" alt="Facilio Logo" class="logo-img mr-2">
+                </a>
+                <ul class="hidden md:flex space-x-6 text-gray-600">
+                    <li><a href="index.html" class="hover:text-orange-primary transition duration-300">Home</a></li>
+                    <li><a href="about.html" class="hover:text-orange-primary transition duration-300">About Us</a></li>
+                    <li><a href="services.html" class="hover:text-orange-primary transition duration-300">Services</a></li>
+                    <li><a href="contact.html" class="text-orange-primary font-medium">Contact</a></li>
+                </ul>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="#" class="text-gray-600 hover:text-orange-primary hidden md:block transition duration-300">Login</a>
+                <button class="orange-button hidden md:block">Dashboard</button>
+                <div class="md:hidden">
+                    <button id="menu-btn" class="hamburger focus:outline-none">
+                        <span class="hamburger-top"></span>
+                        <span class="hamburger-middle"></span>
+                        <span class="hamburger-bottom"></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Mobile menu -->
+        <div id="menu" class="mobile-menu md:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white">
+                <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-orange-primary hover:bg-gray-50">Home</a>
+                <a href="about.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-orange-primary hover:bg-gray-50">About Us</a>
+                <a href="services.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-orange-primary hover:bg-gray-50">Services</a>
+                <a href="contact.html" class="block px-3 py-2 rounded-md text-base font-medium text-orange-700 bg-orange-50">Contact</a>
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-orange-primary hover:bg-gray-50">Login</a>
+                <button class="orange-button w-full mt-2">Dashboard</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative bg-gradient-to-r from-orange-500 to-orange-400 text-white py-20 md:py-28 overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full opacity-10">
+            <div class="absolute top-20 left-10 w-40 h-40 bg-white rounded-full filter blur-xl animate-pulse"></div>
+            <div class="absolute bottom-10 right-10 w-60 h-60 bg-white rounded-full filter blur-xl animate-pulse"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 text-center relative z-10">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-6 animate__animated animate__fadeInDown">
+                Contact Facilio
+            </h1>
+            <p class="text-xl md:text-2xl max-w-3xl mx-auto opacity-90 animate__animated animate__fadeInDown animate__delay-1s">
+                Get in touch with our facility management experts
+            </p>
+        </div>
+    </section>
+
+    <!-- Contact Info Section -->
+    <section class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 fade-in">
+                <span class="text-orange-primary font-semibold">OUR OFFICES</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+                    How to Reach Us
+                </h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    We're always available to discuss your facility management needs
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="contact-card bg-white p-8 rounded-lg border border-gray-100 fade-in">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Registered Office</h3>
+                    <address class="text-gray-600 not-italic mb-4">
+                        Krishnakripa, VP/2/333,<br>
+                        Sankaran Nair Road, Thirumala,<br>
+                        Thiruvananthapuram - 695573
+                    </address>
+                    <div class="mt-6">
+                        <a href="https://maps.google.com" target="_blank" class="text-orange-primary font-medium flex items-center">
+                            <i class="fas fa-directions mr-2"></i> Get Directions
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="contact-card bg-white p-8 rounded-lg border border-gray-100 fade-in">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Phone & Email</h3>
+                    <ul class="space-y-3 text-gray-600">
+                        <li class="flex items-start">
+                            <i class="fas fa-phone text-orange-primary mt-1 mr-3"></i>
+                            <span>+91 80 1234 5678</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope text-orange-primary mt-1 mr-3"></i>
+                            <span>info@facilio.com</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-headset text-orange-primary mt-1 mr-3"></i>
+                            <span>24/7 Support: +91 90 1234 5678</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="contact-card bg-white p-8 rounded-lg border border-gray-100 fade-in">
+                    <div class="contact-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Business Hours</h3>
+                    <ul class="space-y-3 text-gray-600">
+                        <li class="flex justify-between">
+                            <span>Monday - Friday</span>
+                            <span>9:00 AM - 6:00 PM</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>Saturday</span>
+                            <span>9:00 AM - 2:00 PM</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>Sunday</span>
+                            <span>Closed</span>
+                        </li>
+                        <li class="pt-4 text-sm text-orange-primary">
+                            <i class="fas fa-info-circle mr-2"></i> Emergency services available 24/7
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section class="py-16 md:py-24 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row gap-12">
+                <div class="lg:w-1/2 fade-in">
+                    <span class="text-orange-primary font-semibold">GET IN TOUCH</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
+                        Send Us a Message
+                    </h2>
+                    <p class="text-gray-600 mb-8">
+                        Have questions about our services or want to discuss your facility management needs? Fill out the form and our team will get back to you within 24 hours.
+                    </p>
+                    
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="name" class="block text-gray-700 font-medium mb-2">Full Name</label>
+                                <input type="text" id="name" class="form-input" placeholder="Your name" required>
+                            </div>
+                            <div>
+                                <label for="company" class="block text-gray-700 font-medium mb-2">Company</label>
+                                <input type="text" id="company" class="form-input" placeholder="Your company">
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+                                <input type="email" id="email" class="form-input" placeholder="your.email@example.com" required>
+                            </div>
+                            <div>
+                                <label for="phone" class="block text-gray-700 font-medium mb-2">Phone</label>
+                                <input type="tel" id="phone" class="form-input" placeholder="+91 1234567890">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="service" class="block text-gray-700 font-medium mb-2">Service Interested In</label>
+                            <select id="service" class="form-input">
+                                <option value="">Select a service</option>
+                                <option value="security">Security Services</option>
+                                <option value="cleaning">Housekeeping & Cleaning</option>
+                                <option value="pest">Pest Control</option>
+                                <option value="landscaping">Landscaping & Gardening</option>
+                                <option value="hvac">HVAC Maintenance</option>
+                                <option value="electrical">Electrical Maintenance</option>
+                                <option value="fire">Fire Safety Systems</option>
+                                <option value="other">Other Services</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block text-gray-700 font-medium mb-2">Message</label>
+                            <textarea id="message" rows="5" class="form-input" placeholder="Tell us about your facility management needs"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="orange-button px-8 py-3 rounded-xl w-full md:w-auto">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="lg:w-1/2 fade-in">
+                    <div class="map-container bg-gray-200">
+                        <!-- Google Maps Embed -->
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3945.289722292848!2d76.96251131478593!3d8.52461599392082!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b05bbb805bbcd47%3A0x15439fab5c5c81cb!2sThirumala%2C%20Thiruvananthapuram%2C%20Kerala!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin" 
+                                width="100%" 
+                                height="100%" 
+                                style="border:0;" 
+                                allowfullscreen="" 
+                                loading="lazy">
+                        </iframe>
+                    </div>
+                    
+                    <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-white p-6 rounded-lg shadow-sm">
+                            <h3 class="text-lg font-bold text-gray-800 mb-3">For New Business</h3>
+                            <p class="text-gray-600 mb-4">Interested in our facility management services?</p>
+                            <a href="mailto:sales@facilio.com" class="text-orange-primary font-medium">sales@facilio.com</a>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-lg shadow-sm">
+                            <h3 class="text-lg font-bold text-gray-800 mb-3">Career Opportunities</h3>
+                            <p class="text-gray-600 mb-4">Join our team of facility management professionals</p>
+                            <a href="mailto:careers@facilio.com" class="text-orange-primary font-medium">careers@facilio.com</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 fade-in">
+                <span class="text-orange-primary font-semibold">FAQS</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+                    Frequently Asked Questions
+                </h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    Quick answers to common questions about our services
+                </p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto space-y-6 fade-in">
+                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                    <button class="faq-toggle w-full text-left p-6 bg-gray-50 hover:bg-gray-100 transition duration-300 flex justify-between items-center">
+                        <h3 class="text-lg font-medium text-gray-800">What sectors do you serve?</h3>
+                        <i class="fas fa-chevron-down text-orange-primary transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content p-6 bg-white hidden">
+                        <p class="text-gray-600">We cater to residential complexes, commercial buildings, schools, hospitals, airports, seaports, and government facilities across India.</p>
+                    </div>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                    <button class="faq-toggle w-full text-left p-6 bg-gray-50 hover:bg-gray-100 transition duration-300 flex justify-between items-center">
+                        <h3 class="text-lg font-medium text-gray-800">Do you offer customized facility management plans?</h3>
+                        <i class="fas fa-chevron-down text-orange-primary transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content p-6 bg-white hidden">
+                        <p class="text-gray-600">Yes, all our services are tailored to meet the specific needs of each client. We conduct thorough site assessments before proposing customized solutions.</p>
+                    </div>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                    <button class="faq-toggle w-full text-left p-6 bg-gray-50 hover:bg-gray-100 transition duration-300 flex justify-between items-center">
+                        <h3 class="text-lg font-medium text-gray-800">How do you ensure quality service delivery?</h3>
+                        <i class="fas fa-chevron-down text-orange-primary transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content p-6 bg-white hidden">
+                        <p class="text-gray-600">Through regular audits, trained staff, compliance with ISO standards, and advanced facility management software for monitoring and reporting.</p>
+                    </div>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                    <button class="faq-toggle w-full text-left p-6 bg-gray-50 hover:bg-gray-100 transition duration-300 flex justify-between items-center">
+                        <h3 class="text-lg font-medium text-gray-800">Is your support available 24/7?</h3>
+                        <i class="fas fa-chevron-down text-orange-primary transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content p-6 bg-white hidden">
+                        <p class="text-gray-600">Absolutely. We offer round-the-clock customer support for all emergency and critical services through our dedicated helpdesk.</p>
+                    </div>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                    <button class="faq-toggle w-full text-left p-6 bg-gray-50 hover:bg-gray-100 transition duration-300 flex justify-between items-center">
+                        <h3 class="text-lg font-medium text-gray-800">What areas do you currently operate in?</h3>
+                        <i class="fas fa-chevron-down text-orange-primary transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content p-6 bg-white hidden">
+                        <p class="text-gray-600">We currently provide services across major cities in India including Thiruvananthapuram, Bangalore, Chennai, Hyderabad, and Mumbai, with plans for national expansion.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 md:py-24 bg-gradient-to-r from-orange-500 to-amber-500 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Transform Your Facilities?</h2>
+            <p class="text-xl opacity-90 max-w-2xl mx-auto mb-8">
+                Our team is ready to discuss your facility management requirements and provide tailored solutions.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button class="bg-white text-orange-500 px-8 py-4 rounded-xl font-semibold hover:bg-gray-100 transition duration-300">
+                    <i class="fas fa-phone-alt mr-2"></i> Call Now
+                </button>
+                <button class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-xl font-semibold hover:bg-white hover:text-orange-500 transition duration-300">
+                    Request Free Consultation
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <div class="text-2xl font-bold flex items-center mb-4">
+                        <img src="PHOTO-2025-07-30-21-37-13-removebg-preview.png" alt="Facilio Logo" class="logo-img mr-2">
+                    </div>
+                    <p class="text-gray-400 mb-6">Comprehensive facility management solutions for modern businesses.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-orange-primary transition duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-orange-primary transition duration-300">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-orange-primary transition duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="services.html" class="text-gray-400 hover:text-orange-primary transition duration-300">Soft Services</a></li>
+                        <li><a href="services.html" class="text-gray-400 hover:text-orange-primary transition duration-300">Hard Services</a></li>
+                        <li><a href="services.html" class="text-gray-400 hover:text-orange-primary transition duration-300">Specialized Services</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Company</h3>
+                    <ul class="space-y-2">
+                        <li><a href="about.html" class="text-gray-400 hover:text-orange-primary transition duration-300">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-orange-primary transition duration-300">Leadership</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-orange-primary transition duration-300">Careers</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-orange-primary transition duration-300">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact</h3>
+                    <ul class="space-y-2">
+                        <li class="text-gray-400"><i class="fas fa-map-marker-alt mr-2 text-orange-primary"></i> Krishnakripa, VP/2/333, Sankaran Nair Road, Thirumala, Thiruvananthapuram - 695573</li>
+                        <li class="text-gray-400"><i class="fas fa-phone-alt mr-2 text-orange-primary"></i> +91 80 1234 5678</li>
+                        <li class="text-gray-400"><i class="fas fa-envelope mr-2 text-orange-primary"></i> info@facilio.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-gray-700 text-center text-gray-400 text-sm">
+                <p>© 2023 Facilio Facility Management Services Pvt Ltd. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const menu = document.getElementById('menu');
+        
+        menuBtn.addEventListener('click', () => {
+            menuBtn.classList.toggle('open');
+            menu.classList.toggle('open');
+            menu.classList.toggle('max-h-0');
+            menu.classList.toggle('max-h-[500px]');
+        });
+
+        // Fade-in animation on scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const fadeInOnScroll = () => {
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('visible');
+                }
+            });
+        };
+        
+        window.addEventListener('load', fadeInOnScroll);
+        window.addEventListener('scroll', fadeInOnScroll);
+
+        // FAQ toggle functionality
+        document.querySelectorAll('.faq-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                const icon = button.querySelector('i');
+                
+                content.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180');
+            });
+        });
+    </script>
+</body>
+</html>

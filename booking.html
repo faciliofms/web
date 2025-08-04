@@ -1,0 +1,802 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Services | Facilio Facility Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        .orange-button {
+            background-color: #f97316;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .orange-button:hover {
+            background-color: #ea580c;
+            transform: translateY(-2px);
+        }
+        .text-orange-primary {
+            color: #f97316;
+        }
+        .service-card {
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-left-color: #f97316;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: #fff7ed;
+            color: #f97316;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .hamburger {
+            width: 24px;
+            height: 24px;
+            transition: all 0.25s;
+            position: relative;
+        }
+        .hamburger-top,
+        .hamburger-middle,
+        .hamburger-bottom {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 24px;
+            height: 2px;
+            background: #4b5563;
+            transform: rotate(0);
+            transition: all 0.5s;
+        }
+        .hamburger-middle {
+            transform: translateY(7px);
+        }
+        .hamburger-bottom {
+            transform: translateY(14px);
+        }
+        .open .hamburger-top {
+            transform: rotate(45deg) translateY(6px) translate(6px);
+        }
+        .open .hamburger-middle {
+            display: none;
+        }
+        .open .hamburger-bottom {
+            transform: rotate(-45deg) translateY(6px) translate(-6px);
+        }
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+        .mobile-menu.open {
+            max-height: 500px;
+        }
+        .logo-img {
+            height: 40px;
+            width: auto;
+        }
+        .fade-in {
+            opacity: 0;
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            transform: translateY(20px);
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .form-input {
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 12px 16px;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        .form-input:focus {
+            border-color: #f97316;
+            box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.2);
+            outline: none;
+        }
+        .booking-step {
+            display: none;
+        }
+        .booking-step.active {
+            display: block;
+        }
+        .step-indicator {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+        .step-indicator.incomplete {
+            background-color: #e5e7eb;
+            color: #6b7280;
+        }
+        .step-indicator.active {
+            background-color: #f97316;
+            color: white;
+        }
+        .step-indicator.complete {
+            background-color: #10b981;
+            color: white;
+        }
+        .time-slot {
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .time-slot:hover, .time-slot.selected {
+            border-color: #f97316;
+            background-color: #fff7ed;
+        }
+        .time-slot.unavailable {
+            background-color: #f3f4f6;
+            color: #9ca3af;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Header Section -->
+    <header class="bg-white shadow-sm py-4 sticky top-0 z-50">
+        <nav class="container mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center space-x-8">
+                <a href="index.html" class="text-2xl font-bold text-gray-900 flex items-center">
+                    <img src="PHOTO-2025-07-30-21-37-13-removebg-preview.png" alt="Facilio Logo" class="logo-img mr-2">
+                </a>
+                <ul class="hidden md:flex space-x-6 text-gray-600">
+                    <li><a href="index.html" class="hover:text-orange-primary transition duration-300">Home</a></li>
+                    <li><a href="about.html" class="hover:text-orange-primary transition duration-300">About Us</a></li>
+                    <li><a href="services.html" class="hover:text-orange-primary transition duration-300">Services</a></li>
+                    <li><a href="contact.html" class="hover:text-orange-primary transition duration-300">Contact</a></li>
+                    <li><a href="booking.html" class="text-orange-primary font-medium">Book Now</a></li>
+                </ul>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="#" class="text-gray-600 hover:text-orange-primary hidden md:block transition duration-300">Login</a>
+                <button class="orange-button hidden md:block">Dashboard</button>
+                <div class="md:hidden">
+                    <button id="menu-btn" class="hamburger focus:outline-none">
+                        <span class="hamburger-top"></span>
+                        <span class="hamburger-middle"></span>
+                        <span class="hamburger-bottom"></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Mobile menu -->
+        <div id="menu" class="mobile-menu md:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white">
+                <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-orange-primary hover:bg-gray-50">Home</a>
+                <a href="about.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-orange-primary hover:bg-gray-50">About Us</a>
+                <a href="services.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-orange-primary hover:bg-gray-50">Services</a>
+                <a href="contact.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-orange-primary hover:bg-gray-50">Contact</a>
+                <a href="booking.html" class="block px-3 py-2 rounded-md text-base font-medium text-orange-700 bg-orange-50">Book Now</a>
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-orange-primary hover:bg-gray-50">Login</a>
+                <button class="orange-button w-full mt-2">Dashboard</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative bg-gradient-to-r from-orange-500 to-orange-400 text-white py-20 md:py-28 overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full opacity-10">
+            <div class="absolute top-20 left-10 w-40 h-40 bg-white rounded-full filter blur-xl animate-pulse"></div>
+            <div class="absolute bottom-10 right-10 w-60 h-60 bg-white rounded-full filter blur-xl animate-pulse"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 text-center relative z-10">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-6 animate__animated animate__fadeInDown">
+                Book Our Services
+            </h1>
+            <p class="text-xl md:text-2xl max-w-3xl mx-auto opacity-90 animate__animated animate__fadeInDown animate__delay-1s">
+                Schedule your facility management services with ease
+            </p>
+        </div>
+    </section>
+
+    <!-- Booking Process Section -->
+    <section class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-4 max-w-5xl">
+            <!-- Progress Steps -->
+            <div class="flex justify-between mb-16 fade-in">
+                <div class="flex flex-col items-center">
+                    <div class="step-indicator complete" id="step1-indicator">1</div>
+                    <span class="mt-2 text-sm font-medium">Service Selection</span>
+                </div>
+                <div class="flex-1 flex items-center px-2">
+                    <div class="w-full h-1 bg-gray-200">
+                        <div class="h-1 bg-orange-500 transition-all duration-500" id="progress-bar"></div>
+                    </div>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="step-indicator incomplete" id="step2-indicator">2</div>
+                    <span class="mt-2 text-sm font-medium">Date & Time</span>
+                </div>
+                <div class="flex-1 flex items-center px-2">
+                    <div class="w-full h-1 bg-gray-200"></div>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="step-indicator incomplete" id="step3-indicator">3</div>
+                    <span class="mt-2 text-sm font-medium">Your Details</span>
+                </div>
+            </div>
+            
+            <!-- Step 1: Service Selection -->
+            <div class="booking-step active fade-in" id="step1">
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-6">Select Your Service</h2>
+                <p class="text-gray-600 mb-8">Choose from our comprehensive range of facility management services</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Soft Services -->
+                    <div class="service-card bg-white p-6 rounded-lg border border-gray-100">
+                        <div class="flex items-start">
+                            <div class="service-icon mr-4">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800 mb-2">Security Services</h3>
+                                <p class="text-gray-600 mb-4">24/7 professional security personnel for your premises</p>
+                                <button class="select-service orange-button" data-service="Security Services">Select</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="service-card bg-white p-6 rounded-lg border border-gray-100">
+                        <div class="flex items-start">
+                            <div class="service-icon mr-4">
+                                <i class="fas fa-video"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800 mb-2">CCTV & Access Control</h3>
+                                <p class="text-gray-600 mb-4">Modern surveillance and access management systems</p>
+                                <button class="select-service orange-button" data-service="CCTV & Access Control">Select</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="service-card bg-white p-6 rounded-lg border border-gray-100">
+                        <div class="flex items-start">
+                            <div class="service-icon mr-4">
+                                <i class="fas fa-broom"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800 mb-2">Housekeeping & Cleaning</h3>
+                                <p class="text-gray-600 mb-4">Professional cleaning services for your facility</p>
+                                <button class="select-service orange-button" data-service="Housekeeping & Cleaning">Select</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="service-card bg-white p-6 rounded-lg border border-gray-100">
+                        <div class="flex items-start">
+                            <div class="service-icon mr-4">
+                                <i class="fas fa-bug"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800 mb-2">Pest Control</h3>
+                                <p class="text-gray-600 mb-4">Effective pest management solutions</p>
+                                <button class="select-service orange-button" data-service="Pest Control">Select</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="service-card bg-white p-6 rounded-lg border border-gray-100">
+                        <div class="flex items-start">
+                            <div class="service-icon mr-4">
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800 mb-2">Landscaping & Gardening</h3>
+                                <p class="text-gray-600 mb-4">Maintenance of green spaces and gardens</p>
+                                <button class="select-service orange-button" data-service="Landscaping & Gardening">Select</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="service-card bg-white p-6 rounded-lg border border-gray-100">
+                        <div class="flex items-start">
+                            <div class="service-icon mr-4">
+                                <i class="fas fa-trash-alt"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800 mb-2">Waste Management</h3>
+                                <p class="text-gray-600 mb-4">Structured waste segregation and disposal</p>
+                                <button class="select-service orange-button" data-service="Waste Management">Select</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Hard Services -->
+                    <div class="service-card bg-white p-6 rounded-lg border border-gray-100">
+                        <div class="flex items-start">
+                            <div class="service-icon mr-4">
+                                <i class="fas fa-fan"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800 mb-2">HVAC Maintenance</h3>
+                                <p class="text-gray-600 mb-4">Regular inspection and maintenance of HVAC systems</p>
+                                <button class="select-service orange-button" data-service="HVAC Maintenance">Select</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="service-card bg-white p-6 rounded-lg border border-gray-100">
+                        <div class="flex items-start">
+                            <div class="service-icon mr-4">
+                                <i class="fas fa-fire-extinguisher"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800 mb-2">Fire Safety Systems</h3>
+                                <p class="text-gray-600 mb-4">Testing and maintenance of fire safety equipment</p>
+                                <button class="select-service orange-button" data-service="Fire Safety Systems">Select</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="service-card bg-white p-6 rounded-lg border border-gray-100">
+                        <div class="flex items-start">
+                            <div class="service-icon mr-4">
+                                <i class="fas fa-tint"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800 mb-2">STP & RO Plant Maintenance</h3>
+                                <p class="text-gray-600 mb-4">Water treatment system operations and maintenance</p>
+                                <button class="select-service orange-button" data-service="STP & RO Plant Maintenance">Select</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="service-card bg-white p-6 rounded-lg border border-gray-100">
+                        <div class="flex items-start">
+                            <div class="service-icon mr-4">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800 mb-2">Electrical Maintenance</h3>
+                                <p class="text-gray-600 mb-4">Substations, generators and electrical systems</p>
+                                <button class="select-service orange-button" data-service="Electrical Maintenance">Select</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="service-card bg-white p-6 rounded-lg border border-gray-100">
+                        <div class="flex items-start">
+                            <div class="service-icon mr-4">
+                                <i class="fas fa-tools"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800 mb-2">General Maintenance</h3>
+                                <p class="text-gray-600 mb-4">Plumbing, carpentry, painting and other repairs</p>
+                                <button class="select-service orange-button" data-service="General Maintenance">Select</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Specialized Services -->
+                    <div class="service-card bg-white p-6 rounded-lg border border-gray-100">
+                        <div class="flex items-start">
+                            <div class="service-icon mr-4">
+                                <i class="fas fa-boxes"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800 mb-2">Asset Management</h3>
+                                <p class="text-gray-600 mb-4">Tracking and management of physical assets</p>
+                                <button class="select-service orange-button" data-service="Asset Management">Select</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="service-card bg-white p-6 rounded-lg border border-gray-100">
+                        <div class="flex items-start">
+                            <div class="service-icon mr-4">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800 mb-2">Vendor Management</h3>
+                                <p class="text-gray-600 mb-4">Coordination of third-party service providers</p>
+                                <button class="select-service orange-button" data-service="Vendor Management">Select</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="service-card bg-white p-6 rounded-lg border border-gray-100">
+                        <div class="flex items-start">
+                            <div class="service-icon mr-4">
+                                <i class="fas fa-clipboard-check"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800 mb-2">Facility Audits</h3>
+                                <p class="text-gray-600 mb-4">Compliance and safety inspections</p>
+                                <button class="select-service orange-button" data-service="Facility Audits">Select</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Step 2: Date & Time Selection -->
+            <div class="booking-step fade-in" id="step2">
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-6">Select Date & Time</h2>
+                <p class="text-gray-600 mb-8">Choose a convenient time for your service</p>
+                
+                <div class="bg-white p-6 rounded-lg border border-gray-100">
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-medium mb-2">Select Date</label>
+                        <input type="date" id="service-date" class="form-input" min="">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-gray-700 font-medium mb-2">Available Time Slots</label>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="time-slots">
+                            <!-- Time slots will be dynamically generated -->
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between mt-8">
+                        <button class="text-orange-primary font-medium back-step" data-step="1">
+                            <i class="fas fa-arrow-left mr-2"></i> Back
+                        </button>
+                        <button class="orange-button px-6 py-2 next-step" data-step="3" disabled>
+                            Next <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Step 3: Customer Details -->
+            <div class="booking-step fade-in" id="step3">
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-6">Your Details</h2>
+                <p class="text-gray-600 mb-8">Please provide your contact information</p>
+                
+                <div class="bg-white p-6 rounded-lg border border-gray-100">
+                    <form id="customer-details" action="https://formsubmit.co/abhinanth132@gmail.com" method="POST">
+                        <!-- Hidden fields for booking data -->
+                        <input type="hidden" name="_subject" value="New Booking Request - Facilio">
+                        <input type="hidden" name="_template" value="table">
+                        <input type="hidden" name="_autoresponse" value="Thank you for booking with Facilio! We have received your request and will contact you shortly to confirm your appointment.">
+                        <input type="text" name="_honey" style="display:none">
+                        <input type="hidden" name="_captcha" value="false">
+                        
+                        <input type="hidden" id="form-service" name="Service">
+                        <input type="hidden" id="form-date" name="Date">
+                        <input type="hidden" id="form-time" name="Time">
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label for="name" class="block text-gray-700 font-medium mb-2">Full Name*</label>
+                                <input type="text" id="name" name="Name" class="form-input" required>
+                            </div>
+                            <div>
+                                <label for="company" class="block text-gray-700 font-medium mb-2">Company</label>
+                                <input type="text" id="company" name="Company" class="form-input">
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label for="email" class="block text-gray-700 font-medium mb-2">Email*</label>
+                                <input type="email" id="email" name="Email" class="form-input" required>
+                            </div>
+                            <div>
+                                <label for="phone" class="block text-gray-700 font-medium mb-2">Phone*</label>
+                                <input type="tel" id="phone" name="Phone" class="form-input" required>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="address" class="block text-gray-700 font-medium mb-2">Service Address*</label>
+                            <textarea id="address" name="Address" rows="3" class="form-input" required></textarea>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="notes" class="block text-gray-700 font-medium mb-2">Special Instructions</label>
+                            <textarea id="notes" name="Special Instructions" rows="3" class="form-input"></textarea>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <div class="flex items-start">
+                                <input type="checkbox" id="terms" class="mt-1 mr-3" required>
+                                <label for="terms" class="text-gray-600">I agree to the <a href="#" class="text-orange-primary">Terms of Service</a> and <a href="#" class="text-orange-primary">Privacy Policy</a></label>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-between">
+                            <button type="button" class="text-orange-primary font-medium back-step" data-step="2">
+                                <i class="fas fa-arrow-left mr-2"></i> Back
+                            </button>
+                            <button type="submit" class="orange-button px-6 py-2">
+                                Confirm Booking
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Booking Success (will redirect to FormSubmit's thank you page) -->
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 md:py-24 bg-gradient-to-r from-orange-500 to-amber-500 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Need Immediate Assistance?</h2>
+            <p class="text-xl opacity-90 max-w-2xl mx-auto mb-8">
+                Call our 24/7 support line for urgent facility management needs
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button class="bg-white text-orange-500 px-8 py-4 rounded-xl font-semibold hover:bg-gray-100 transition duration-300">
+                    <i class="fas fa-phone-alt mr-2"></i> +91 90 1234 5678
+                </button>
+                <button class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-xl font-semibold hover:bg-white hover:text-orange-500 transition duration-300">
+                    <i class="fas fa-envelope mr-2"></i> support@facilio.com
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <div class="text-2xl font-bold flex items-center mb-4">
+                        <img src="PHOTO-2025-07-30-21-37-13-removebg-preview.png" alt="Facilio Logo" class="logo-img mr-2">
+                    </div>
+                    <p class="text-gray-400 mb-6">Comprehensive facility management solutions for modern businesses.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-orange-primary transition duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-orange-primary transition duration-300">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-orange-primary transition duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="services.html" class="text-gray-400 hover:text-orange-primary transition duration-300">Soft Services</a></li>
+                        <li><a href="services.html" class="text-gray-400 hover:text-orange-primary transition duration-300">Hard Services</a></li>
+                        <li><a href="services.html" class="text-gray-400 hover:text-orange-primary transition duration-300">Specialized Services</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Company</h3>
+                    <ul class="space-y-2">
+                        <li><a href="about.html" class="text-gray-400 hover:text-orange-primary transition duration-300">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-orange-primary transition duration-300">Leadership</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-orange-primary transition duration-300">Careers</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-orange-primary transition duration-300">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact</h3>
+                    <ul class="space-y-2">
+                        <li class="text-gray-400"><i class="fas fa-map-marker-alt mr-2 text-orange-primary"></i> Krishnakripa, VP/2/333, Sankaran Nair Road, Thirumala, Thiruvananthapuram - 695573</li>
+                        <li class="text-gray-400"><i class="fas fa-phone-alt mr-2 text-orange-primary"></i> +91 80 1234 5678</li>
+                        <li class="text-gray-400"><i class="fas fa-envelope mr-2 text-orange-primary"></i> info@facilio.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-gray-700 text-center text-gray-400 text-sm">
+                <p>© 2023 Facilio Facility Management Services Pvt Ltd. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const menu = document.getElementById('menu');
+        
+        menuBtn.addEventListener('click', () => {
+            menuBtn.classList.toggle('open');
+            menu.classList.toggle('open');
+            menu.classList.toggle('max-h-0');
+            menu.classList.toggle('max-h-[500px]');
+        });
+
+        // Fade-in animation on scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const fadeInOnScroll = () => {
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('visible');
+                }
+            });
+        };
+        
+        window.addEventListener('load', fadeInOnScroll);
+        window.addEventListener('scroll', fadeInOnScroll);
+
+        // Booking Process Logic
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set minimum date to today
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('service-date').min = today;
+            
+            // Store booking data
+            let bookingData = {
+                service: null,
+                date: null,
+                time: null
+            };
+            
+            // Service selection
+            document.querySelectorAll('.select-service').forEach(button => {
+                button.addEventListener('click', function() {
+                    bookingData.service = this.getAttribute('data-service');
+                    
+                    // Update hidden form field
+                    document.getElementById('form-service').value = bookingData.service;
+                    
+                    // Update progress
+                    document.getElementById('step1-indicator').classList.add('complete');
+                    document.getElementById('step2-indicator').classList.remove('incomplete');
+                    document.getElementById('step2-indicator').classList.add('active');
+                    document.getElementById('progress-bar').style.width = '50%';
+                    
+                    // Move to next step
+                    document.getElementById('step1').classList.remove('active');
+                    document.getElementById('step2').classList.add('active');
+                });
+            });
+            
+            // Date selection
+            document.getElementById('service-date').addEventListener('change', function() {
+                const selectedDate = this.value;
+                bookingData.date = selectedDate;
+                
+                // Update hidden form field
+                document.getElementById('form-date').value = formatDate(selectedDate);
+                
+                // Generate time slots (mock data)
+                const timeSlotsContainer = document.getElementById('time-slots');
+                timeSlotsContainer.innerHTML = '';
+                
+                const timeSlots = [
+                    { time: '09:00 AM - 11:00 AM', available: true },
+                    { time: '11:00 AM - 01:00 PM', available: true },
+                    { time: '01:00 PM - 03:00 PM', available: false },
+                    { time: '03:00 PM - 05:00 PM', available: true },
+                    { time: '05:00 PM - 07:00 PM', available: true },
+                    { time: '07:00 PM - 09:00 PM', available: false }
+                ];
+                
+                timeSlots.forEach(slot => {
+                    const slotElement = document.createElement('div');
+                    slotElement.className = `time-slot ${slot.available ? '' : 'unavailable'}`;
+                    slotElement.textContent = slot.time;
+                    
+                    if (slot.available) {
+                        slotElement.addEventListener('click', function() {
+                            // Remove selected class from all slots
+                            document.querySelectorAll('.time-slot').forEach(el => {
+                                el.classList.remove('selected');
+                            });
+                            
+                            // Add selected class to clicked slot
+                            this.classList.add('selected');
+                            bookingData.time = this.textContent;
+                            
+                            // Update hidden form field
+                            document.getElementById('form-time').value = bookingData.time;
+                            
+                            // Enable next button
+                            document.querySelector('.next-step[data-step="3"]').disabled = false;
+                        });
+                    }
+                    
+                    timeSlotsContainer.appendChild(slotElement);
+                });
+            });
+            
+            // Step navigation
+            document.querySelectorAll('.next-step').forEach(button => {
+                button.addEventListener('click', function() {
+                    const nextStep = this.getAttribute('data-step');
+                    
+                    // Update progress
+                    if (nextStep === '3') {
+                        document.getElementById('step2-indicator').classList.remove('active');
+                        document.getElementById('step2-indicator').classList.add('complete');
+                        document.getElementById('step3-indicator').classList.remove('incomplete');
+                        document.getElementById('step3-indicator').classList.add('active');
+                        document.getElementById('progress-bar').style.width = '100%';
+                    }
+                    
+                    // Move to next step
+                    document.querySelectorAll('.booking-step').forEach(step => {
+                        step.classList.remove('active');
+                    });
+                    document.getElementById(`step${nextStep}`).classList.add('active');
+                });
+            });
+            
+            document.querySelectorAll('.back-step').forEach(button => {
+                button.addEventListener('click', function() {
+                    const prevStep = this.getAttribute('data-step');
+                    
+                    // Move to previous step
+                    document.querySelectorAll('.booking-step').forEach(step => {
+                        step.classList.remove('active');
+                    });
+                      document.getElementById(`step${prevStep}`).classList.add('active');
+                    
+                    // Update progress
+                    if (prevStep === '1') {
+                        document.getElementById('step1-indicator').classList.remove('complete');
+                        document.getElementById('step1-indicator').classList.add('active');
+                        document.getElementById('step2-indicator').classList.remove('active');
+                        document.getElementById('step2-indicator').classList.add('incomplete');
+                        document.getElementById('progress-bar').style.width = '0%';
+                    } else if (prevStep === '2') {
+                        document.getElementById('step2-indicator').classList.remove('complete');
+                        document.getElementById('step2-indicator').classList.add('active');
+                        document.getElementById('step3-indicator').classList.remove('active');
+                        document.getElementById('step3-indicator').classList.add('incomplete');
+                        document.getElementById('progress-bar').style.width = '50%';
+                    }
+                });
+            });
+            
+            // Helper function to format date
+            function formatDate(dateString) {
+                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                const date = new Date(dateString);
+                return date.toLocaleDateString('en-US', options);
+            }
+            
+            // Form submission handling
+            document.getElementById('customer-details').addEventListener('submit', function(e) {
+                // You can add additional validation here if needed
+                // FormSubmit will handle the actual submission
+                
+                // For demo purposes, we'll show a success message
+                // In production, FormSubmit will redirect to their thank you page
+                alert('Thank you for your booking! We will contact you shortly to confirm your appointment.');
+            });
+        });
+    </script>
+</body>
+</html>
