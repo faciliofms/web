@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Facilio - Integrated Facility Management Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .orange-button {
+            background-color: #f97316;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .orange-button:hover {
+            background-color: #ea580c;
+            transform: translateY(-2px);
+        }
+        .text-orange-primary {
+            color: #f97316;
+        }
+        .bg-orange-primary {
+            background-color: #f97316;
+        }
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background-color: #fff7ed;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #f97316;
+            margin-bottom: 1.5rem;
+        }
+        .timeline-item {
+            position: relative;
+            padding-left: 2.5rem;
+            padding-bottom: 3rem;
+        }
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #f97316;
+            border: 4px solid #fed7aa;
+        }
+        .timeline-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 9px;
+            top: 24px;
+            width: 2px;
+            height: calc(100% - 24px);
+            background-color: #e5e7eb;
+        }
+        .footer-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .footer-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #f97316;
+            transition: width 0.3s ease;
+        }
+        .footer-link:hover::after {
+            width: 100%;
+        }
+        .hamburger {
+            width: 24px;
+            height: 24px;
+            transition: all 0.25s;
+            position: relative;
+        }
+        .hamburger-top,
+        .hamburger-middle,
+        .hamburger-bottom {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 24px;
+            height: 2px;
+            background: #4b5563;
+            transform: rotate(0);
+            transition: all 0.5s;
+        }
+        .hamburger-middle {
+            transform: translateY(7px);
+        }
+        .hamburger-bottom {
+            transform: translateY(14px);
+        }
+        .open .hamburger-top {
+            transform: rotate(45deg) translateY(6px) translate(6px);
+        }
+        .open .hamburger-middle {
+            display: none;
+        }
+        .open .hamburger-bottom {
+            transform: rotate(-45deg) translateY(6px) translate(-6px);
+        }
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+        .mobile-menu.open {
+            max-height: 500px;
+        }
+        .fade-in {
+            opacity: 0;
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            transform: translateY(20px);
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .values-card {
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s ease;
+        }
+        .values-card:hover {
+            border-color: #f97316;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .career-card {
+            transition: all 0.3s ease;
+        }
+        .career-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .logo-img {
+            height: 100px;
+            width: auto;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Header Section -->
+    <header class="bg-white shadow-sm py-4 sticky top-0 z-50">
+        <nav class="container mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center space-x-8">
+                <a href="index.html" class="text-2xl font-bold text-gray-900 flex items-center">
+                    <img src="img/logo.png" alt="Facilio Logo" class="logo-img mr-2">
+                </a>
+                <ul class="hidden md:flex space-x-6 text-gray-600">
+                    <li><a href="index.html" class="hover:text-orange-primary transition duration-300">Home</a></li>
+                    <li><a href="about.html" class="text-orange-primary font-medium">About Us</a></li>
+                    <li><a href="serves.html" class="hover:text-orange-primary transition duration-300">Services</a></li>
+                    <li><a href="contact.html" class="hover:text-orange-primary transition duration-300">Contact</a></li>
+                </ul>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="booking.html" class="text-gray-600 hover:text-orange-primary hidden md:block transition duration-300">
+                <button class="orange-button hidden md:block">Booking</button></a>
+                <div class="md:hidden">
+                    <button id="menu-btn" class="hamburger focus:outline-none">
+                        <span class="hamburger-top"></span>
+                        <span class="hamburger-middle"></span>
+                        <span class="hamburger-bottom"></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <div id="menu" class="mobile-menu md:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white">
+                <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-orange-primary hover:bg-gray-50">Home</a>
+                <a href="about.html" class="block px-3 py-2 rounded-md text-base font-medium text-orange-700 bg-orange-50">About Us</a>
+                <a href="serves.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-orange-primary hover:bg-gray-50">Services</a>
+                <a href="contact.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-orange-primary hover:bg-gray-50">Contact</a>
+                 <button class="orange-button w-full mt-2">Dashboard</button>
+            </div>
+        </div>
+    </header>
+
+     <!-- Hero Section -->
+    <section class="relative bg-gradient-to-r from-orange-500 to-orange-400 text-white py-20 md:py-28 overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full opacity-10">
+            <div class="absolute top-20 left-10 w-40 h-40 bg-white rounded-full filter blur-xl animate-pulse"></div>
+            <div class="absolute bottom-10 right-10 w-60 h-60 bg-white rounded-full filter blur-xl animate-pulse"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 text-center relative z-10">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-6 animate__animated animate__fadeInDown">
+                About Facilio
+            </h1>
+            <p class="text-xl md:text-2xl max-w-3xl mx-auto opacity-90 animate__animated animate__fadeInDown animate__delay-1s">
+                Sustainable, technology-driven facility management solutions from Kerala
+            </p>
+        </div>
+    </section>
+
+    <!-- Our Story Section -->
+    <section class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <div class="lg:w-1/2 fade-in">
+                    <span class="text-orange-primary font-semibold">OUR COMPANY</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
+                        Kerala's Emerging Facility Management Leader
+                    </h2>
+                    <p class="text-gray-600 mb-6">
+                        Facilio Facility Management Services Pvt. Ltd. is a Thiruvananthapuram-based startup offering end-to-end integrated facility management solutions. Incorporated on July 16, 2025 and registered with the Ministry of Corporate Affairs, India, we are on a mission to transform facility management through sustainable practices and advanced technologies.
+                    </p>
+                    <p class="text-gray-600 mb-8">
+                        Our solutions focus on optimizing operational efficiency through smart energy management systems that significantly reduce power consumption across key infrastructure components including elevators, HVAC systems, STPs, RO plants, and lighting systems.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <div class="bg-orange-50 px-6 py-3 rounded-lg">
+                            <div class="text-2xl font-bold text-orange-primary">2025</div>
+                            <p class="text-gray-600 text-sm">Year Founded</p>
+                        </div>
+                        <div class="bg-orange-50 px-6 py-3 rounded-lg">
+                            <div class="text-2xl font-bold text-orange-primary">100%</div>
+                            <p class="text-gray-600 text-sm">Sustainable Solutions</p>
+                        </div>
+                        <div class="bg-orange-50 px-6 py-3 rounded-lg">
+                            <div class="text-2xl font-bold text-orange-primary">Kerala</div>
+                            <p class="text-gray-600 text-sm">Headquartered</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-1/2 fade-in">
+                    <div class="relative">
+                        <img src="img/img3.webp" alt="Modern sustainable building" class="w-full rounded-xl shadow-lg h-96 object-cover">
+                        <div class="absolute -bottom-6 -right-6 bg-white p-6 rounded-lg shadow-lg hidden md:block">
+                            <div class="flex items-center">
+                                <div class="bg-orange-100 p-3 rounded-full mr-4">
+                                    <i class="fas fa-leaf text-orange-primary text-2xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-xl font-bold text-gray-800 mb-1">Sustainability Focus</h4>
+                                    <p class="text-gray-600">Reducing environmental impact</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Vision Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="fade-in">
+                    <div class="bg-white p-8 rounded-xl shadow-sm h-full">
+                        <div class="feature-icon mb-6">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Our Mission</h3>
+                        <p class="text-gray-600">
+                            To revolutionize facility management in India by combining optimized manpower planning with advanced technologies, delivering sustainable solutions that enhance operational efficiency while reducing environmental impact.
+                        </p>
+                    </div>
+                </div>
+                <div class="fade-in">
+                    <div class="bg-white p-8 rounded-xl shadow-sm h-full">
+                        <div class="feature-icon mb-6">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Our Vision</h3>
+                        <p class="text-gray-600">
+                            To become Kerala's leading facility management provider and expand across India, creating employment opportunities while delivering efficient, sustainable services to residential, commercial, and institutional properties.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 fade-in">
+                <span class="text-orange-primary font-semibold">OUR JOURNEY</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+                    Building the Future
+                </h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    Our path from startup to emerging industry leader
+                </p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto fade-in">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-gray-800">Company Incorporation</h3>
+                            <span class="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-sm font-medium">July 2025</span>
+                        </div>
+                        <p class="text-gray-600">Facilio Facility Management Services Pvt. Ltd. was officially incorporated and registered with the Ministry of Corporate Affairs, India.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-gray-800">First Major Contract</h3>
+                            <span class="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-sm font-medium">Sept 2025</span>
+                        </div>
+                        <p class="text-gray-600">Secured our first major facility management contract with a large residential complex in Thiruvananthapuram.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-gray-800">Technology Implementation</h3>
+                            <span class="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-sm font-medium">2026</span>
+                        </div>
+                        <p class="text-gray-600">Launched our proprietary smart energy management systems for HVAC, lighting, and water treatment plants.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-gray-800">Expansion Plans</h3>
+                            <span class="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-sm font-medium">2027</span>
+                        </div>
+                        <p class="text-gray-600">Began expansion across Kerala with plans to enter other Indian markets, focusing on sustainable facility solutions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="py-16 md:py-24 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 fade-in">
+                <span class="text-orange-primary font-semibold">OUR VALUES</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+                    The Facilio Difference
+                </h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    Principles that guide our operations and client relationships
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="values-card bg-white p-8 rounded-lg fade-in">
+                    <div class="feature-icon mb-6">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Sustainability</h3>
+                    <p class="text-gray-600">Implementing eco-friendly solutions that reduce environmental impact through energy and water conservation.</p>
+                </div>
+                
+                <div class="values-card bg-white p-8 rounded-lg fade-in">
+                    <div class="feature-icon mb-6">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Efficiency</h3>
+                    <p class="text-gray-600">Optimizing operations to reduce costs while maintaining high service quality through smart technologies.</p>
+                </div>
+                
+                <div class="values-card bg-white p-8 rounded-lg fade-in">
+                    <div class="feature-icon mb-6">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Innovation</h3>
+                    <p class="text-gray-600">Continuous investment in technology and process improvements to stay ahead of industry standards.</p>
+                </div>
+                
+                <div class="values-card bg-white p-8 rounded-lg fade-in">
+                    <div class="feature-icon mb-6">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Community</h3>
+                    <p class="text-gray-600">Creating employment opportunities and supporting local communities through our operations.</p>
+                </div>
+                
+                <div class="values-card bg-white p-8 rounded-lg fade-in">
+                    <div class="feature-icon mb-6">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Reliability</h3>
+                    <p class="text-gray-600">Consistent, dependable service delivery that clients can trust around the clock.</p>
+                </div>
+                
+                <div class="values-card bg-white p-8 rounded-lg fade-in">
+                    <div class="feature-icon mb-6">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Partnership</h3>
+                    <p class="text-gray-600">Building long-term relationships with clients based on mutual success and shared goals.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 md:py-24 bg-gradient-to-r from-orange-500 to-amber-500 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Transform Your Facilities?</h2>
+            <p class="text-xl opacity-90 max-w-2xl mx-auto mb-8">Discover how our sustainable, technology-driven solutions can optimize your operations and reduce costs.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button class="bg-white text-orange-500 px-8 py-4 rounded-xl font-semibold hover:bg-gray-100 transition duration-300">
+                    Request Consultation
+                </button>
+                <button class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-xl font-semibold hover:bg-white hover:text-orange-500 transition duration-300">
+                    Contact Our Team
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark-blue text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <div class="text-2xl font-bold flex items-center mb-4">
+                        <i class="fas fa-building text-orange-primary mr-2"></i> Facilio
+                    </div>
+                    <p class="text-gray-400 mb-6">Sustainable, technology-driven facility management solutions from Kerala.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-orange-primary transition duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-orange-primary transition duration-300">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-orange-primary transition duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 footer-link hover:text-orange-primary">Energy Management</a></li>
+                        <li><a href="#" class="text-gray-400 footer-link hover:text-orange-primary">Water Conservation</a></li>
+                        <li><a href="#" class="text-gray-400 footer-link hover:text-orange-primary">HVAC Maintenance</a></li>
+                        <li><a href="#" class="text-gray-400 footer-link hover:text-orange-primary">Security Services</a></li>
+                        <li><a href="#" class="text-gray-400 footer-link hover:text-orange-primary">Waste Management</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Company</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 footer-link hover:text-orange-primary">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 footer-link hover:text-orange-primary">Our Approach</a></li>
+                        <li><a href="#" class="text-gray-400 footer-link hover:text-orange-primary">Sustainability</a></li>
+                        <li><a href="#" class="text-gray-400 footer-link hover:text-orange-primary">Careers</a></li>
+                        <li><a href="#" class="text-gray-400 footer-link hover:text-orange-primary">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact</h3>
+                    <ul class="space-y-2">
+                        <li class="text-gray-400"><i class="fas fa-map-marker-alt mr-2 text-orange-primary"></i> Krishnakripa, VP/2/333, Sankaran Nair Road, Thirumala, Thiruvananthapuram - 695573</li>
+                        <li class="text-gray-400"><i class="fas fa-phone-alt mr-2 text-orange-primary"></i> +91 80 1234 5678</li>
+                        <li class="text-gray-400"><i class="fas fa-envelope mr-2 text-orange-primary"></i> info@faciliofms.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-gray-700 text-center text-gray-400 text-sm">
+                <p>© 2025 Facilio Facility Management Services Pvt. Ltd. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const menu = document.getElementById('menu');
+        
+        menuBtn.addEventListener('click', () => {
+            menuBtn.classList.toggle('open');
+            menu.classList.toggle('open');
+            menu.classList.toggle('max-h-0');
+            menu.classList.toggle('max-h-[500px]');
+        });
+
+        // Fade-in animation on scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const fadeInOnScroll = () => {
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('visible');
+                }
+            });
+        };
+        
+        window.addEventListener('load', fadeInOnScroll);
+        window.addEventListener('scroll', fadeInOnScroll);
+    </script>
+</body>
+</html>
