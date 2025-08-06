@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You | Facilio Facility Management Services</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        .gradient-bg {
+            background: linear-gradient(90deg, #FF6B00 0%, #FF9900 100%);
+        }
+        .orange-button {
+            background-color: #FF6B00;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .orange-button:hover {
+            background-color: #E05F00;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 107, 0, 0.3);
+        }
+        .text-orange-primary {
+            color: #FF6B00;
+        }
+        .bg-dark-blue {
+            background-color: #1A202C;
+        }
+        .checkmark-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #FF6B00;
+            margin: 0 auto;
+            animation: scaleIn 0.5s ease-out;
+        }
+        .checkmark {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: block;
+            stroke-width: 5;
+            stroke: #fff;
+            stroke-miterlimit: 10;
+            animation: fill 0.6s ease-in-out 0.6s forwards, scale 0.6s ease-in-out 0.6s both;
+        }
+        .checkmark-check {
+            transform-origin: 50% 50%;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+        }
+        @keyframes stroke {
+            100% { stroke-dashoffset: 0; }
+        }
+        @keyframes scaleIn {
+            0% { transform: scale(0); opacity: 0; }
+            80% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        @keyframes scale {
+            0%, 100% { transform: none; }
+            50% { transform: scale3d(1.1, 1.1, 1); }
+        }
+        @keyframes fill {
+            100% { box-shadow: inset 0 0 0 100px rgba(255, 107, 0, 0.1); }
+        }
+        .logo-img {
+            height: 100px;
+            width: auto;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header Section (same as index.html) -->
+    <header class="bg-white shadow-sm py-4 sticky top-0 z-50">
+        <nav class="container mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center space-x-8">
+                <a href="index.html" class="text-2xl font-bold text-gray-900 flex items-center">
+                    <img src="img/logo.png" alt="Facilio Logo" class="logo-img mr-2">
+                </a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="index.html" class="text-gray-600 hover:text-orange-primary transition duration-300">
+                    <i class="fas fa-home text-xl"></i>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Thank You Section -->
+    <section class="min-h-screen flex items-center justify-center py-16">
+        <div class="container mx-auto px-4 text-center">
+            <div class="max-w-2xl mx-auto bg-white p-8 md:p-12 rounded-xl shadow-lg">
+                <!-- Animated Checkmark -->
+                <div class="mb-8">
+                    <div class="checkmark-circle">
+                        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                            <circle class="checkmark-circle-bg" cx="26" cy="26" r="25" fill="none"/>
+                            <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                        </svg>
+                    </div>
+                </div>
+                
+                <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
+                    Thank You for Contacting Us!
+                </h1>
+                
+                <p class="text-lg text-gray-600 mb-8">
+                    We've received your message and our team will get back to you within 24 hours. For urgent inquiries, please call us at <a href="tel:+919589589088" class="text-orange-primary font-medium">+91 95895 89088</a>.
+                </p>
+                
+                <div class="bg-orange-50 border-l-4 border-orange-500 p-4 mb-8 text-left rounded">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-info-circle text-orange-500 mt-1"></i>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm text-gray-700">
+                                <strong>What's next?</strong> One of our facility management experts will contact you to discuss your requirements in detail and provide a customized solution.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="index.html" class="orange-button px-8 py-3 rounded-xl transform hover:scale-105 inline-block text-center">
+                        <i class="fas fa-home mr-2"></i> Back to Home
+                    </a>
+                    <a href="serves.html" class="bg-gray-100 text-gray-800 px-8 py-3 rounded-xl font-medium hover:bg-gray-200 transition duration-300 transform hover:scale-105 inline-block text-center">
+                        <i class="fas fa-clipboard-list mr-2"></i> Explore Services
+                    </a>
+                </div>
+                
+               
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (same as index.html) -->
+    <footer class="bg-dark-blue text-white pt-12 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-8">
+                <div>
+                    <div class="text-2xl font-bold flex items-center mb-4">
+                        <i class="fas fa-building text-orange-primary mr-2"></i> Facilio
+                    </div>
+                    <p class="text-gray-400 mb-6">Your trusted partner for comprehensive facility management solutions across India.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-orange-primary transition duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-orange-primary transition duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-orange-primary transition duration-300">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-orange-primary transition duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="text-gray-400 hover:text-orange-primary transition duration-300">Home</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-orange-primary transition duration-300">About Us</a></li>
+                        <li><a href="serves.html" class="text-gray-400 hover:text-orange-primary transition duration-300">Services</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-orange-primary transition duration-300">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Contact Info</h4>
+                    <ul class="space-y-3 text-gray-400">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-orange-primary"></i>
+                            <span>123 Business Park, Sector 44, Gurugram, Haryana 122003</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-3 text-orange-primary"></i>
+                            <span>+91 98765 43210</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-3 text-orange-primary"></i>
+                            <span>info@faciliofms.com</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Business Hours</h4>
+                    <ul class="space-y-3 text-gray-400">
+                        <li>Monday - Friday: 9:00 AM - 6:00 PM</li>
+                        <li>Saturday: 10:00 AM - 4:00 PM</li>
+                        <li>Sunday: Closed</li>
+                        <li>Emergency Support: 24/7</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2025 Facilio Facility Management Services Pvt Ltd. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-500 hover:text-orange-primary text-sm transition duration-300">Privacy Policy</a>
+                    <a href="#" class="text-gray-500 hover:text-orange-primary text-sm transition duration-300">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/919589589088" 
+       class="fixed bottom-6 right-6 md:bottom-8 md:right-8 w-16 h-16 bg-green-500 text-white rounded-full flex items-center justify-center shadow-lg hover:bg-green-600 transition-all duration-300 z-50 animate-bounce"
+       target="_blank"
+       aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp text-3xl"></i>
+    </a>
+
+    <script>
+        // Simple animation to make the thank you section more engaging
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('h1, p, .flex');
+            elements.forEach((el, index) => {
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, 200 * index);
+            });
+            
+            // Set initial styles for animation
+            const style = document.createElement('style');
+            style.textContent = `
+                h1, p, .flex {
+                    opacity: 0;
+                    transform: translateY(20px);
+                    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+                }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
+</body>
+</html>
